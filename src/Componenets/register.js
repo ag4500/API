@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 const RegisterForm = (history) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.formReducers);
+  
   const { email, password } = users.registeruser;
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -14,7 +15,10 @@ const RegisterForm = (history) => {
   };
   const OnSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addUserData(users.registeruser, history));
+    users.registeruser.email.trim() == "" &&
+    users.registeruser.password.trim() == ""
+      ? alert("Please Enter Valid Credentials")
+      : dispatch(addUserData(users.registeruser, history));
   };
   return (
     <Form onSubmit={OnSubmit} className="container">

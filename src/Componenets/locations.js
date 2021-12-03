@@ -7,7 +7,7 @@ const Locations = () => {
   const data = useSelector((state) => state.ItemsReducers);
   useEffect(() => {
     dispatch(locationData());
-  }, []);
+  }, [dispatch]);
   return (
     <Table striped bordered hover size="lg">
       <thead>

@@ -1,39 +1,36 @@
 import { Table } from "react-bootstrap";
 import { useEffect } from "react";
-import { productData } from "../thunks/logItems";
+import { transactionInfo } from "../thunks/logItems";
 import { useSelector, useDispatch } from "react-redux";
-const Products = () => {
+const TransactionComponent = () => {
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.ItemsReducers);
+  const transaction = useSelector((state) => state.ItemsReducers);
   useEffect(() => {
-    dispatch(productData());
+    dispatch(transactionInfo());
   }, [dispatch]);
-
   return (
     <Table striped bordered hover size="lg">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Name</th>
           <th>Cost</th>
           <th>Quantity</th>
           <th> locationId</th>
         </tr>
       </thead>
       <tbody>
-        {product
-          ? product.products.map((data) => (
+        {transaction
+          ? transaction.transaction.map((data) => (
               <tr>
                 <td>{data.id}</td>
-                <td>{data.name}</td>
                 <td>{data.cost}</td>
                 <td>{data.quantity}</td>
-                <td>{data.locationId}</td>
+                <td>{data.productId}</td>
               </tr>
             ))
-          : "Product"}
+          : "Transaction"}
       </tbody>
     </Table>
   );
 };
-export default Products;
+export default TransactionComponent;

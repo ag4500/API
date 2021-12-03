@@ -1,7 +1,9 @@
 export const  User_Token = "  User_Token ";
 export const Set_User = " Set_User";
-export const Products_Item="Products_Item"
-export const Location_Info="Location_Info"
+export const Products_Item="Products_Item";
+export const Location_Info="Location_Info";
+export const Families="Families"
+export const Transaction="Transaction"
 export const setUser = (payload) => (
     {
     type:Set_User,
@@ -21,6 +23,18 @@ export const productItems=(payload)=>(
 export const locationInfo=(payload)=>(
   {
     type:Location_Info,
+    payload
+  }
+)
+export const familiesData=(payload)=>(
+  {
+    type:Families,
+    payload
+  }
+)
+export const transactionData=(payload)=>(
+  {
+    type:Transaction,
     payload
   }
 )

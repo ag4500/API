@@ -1,18 +1,34 @@
-import axios from "axios";
-import { productItems, locationInfo } from "../actions";
-const client = axios.create({
-  baseURL: "http://localhost:8000/",
-});
-let getToken = localStorage.getItem("token") || "[]";
-let parsetoken = JSON.parse(getToken);
-parsetoken.map((data) => {
-  client.defaults.headers.common["Authorization"] = `Bearer ${data.token} `;
-});
+import client from "./axios";
+import {
+  productItems,
+  locationInfo,
+  familiesData,
+  transactionData,
+} from "../actions";
 
+let getToken = localStorage.getItem("token");
+
+client.defaults.headers.common["Authorization"] = `Bearer ${getToken} `;
 export const productData = () => async (dispatch) => {
   try {
     const response = await client.get("/products");
     dispatch(productItems(response.data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+export const familiesInfo = () => async (dispatch) => {
+  try {
+    const response = await client.get("/families");
+    dispatch(familiesData(response.data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+export const transactionInfo = () => async (dispatch) => {
+  try {
+    const response = await client.get("/transactions");
+    dispatch(transactionData(response.data));
   } catch (err) {
     console.log(err);
   }
