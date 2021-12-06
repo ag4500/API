@@ -3,15 +3,16 @@ import { useEffect } from "react";
 import { locationData } from "../thunks/logItems";
 import { useSelector, useDispatch } from "react-redux";
 import Linking from "../link";
+import SelectPagination  from './select'
 const Locations = (props) => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.ItemsReducers);
   useEffect(() => {
-    dispatch(locationData());
+    dispatch(locationData(data.filters));
     if (!localStorage.getItem('token')){
       props.history.push('/login')
     }
-  }, [dispatch]);
+  }, [data.filters]);
   return (
     <>
     <Linking/>
@@ -33,6 +34,7 @@ const Locations = (props) => {
           : "location"}
       </tbody>
     </Table>
+    <SelectPagination />
     </>
   );
 };

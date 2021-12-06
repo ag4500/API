@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { productData } from "../thunks/logItems";
 import { useSelector, useDispatch } from "react-redux";
 import Linking from "../link";
+import SelectPagination from "./select";
 const Products = (props) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.ItemsReducers);
@@ -11,9 +12,9 @@ const Products = (props) => {
     if (!token) {
       props.history.push("/login");
     } else {
-      dispatch(productData());
+      dispatch(productData(product.filters));
     }
-  }, []);
+  }, [product.filters]);
   return (
     <>
       <Linking />
@@ -41,6 +42,7 @@ const Products = (props) => {
             : "Product"}
         </tbody>
       </Table>
+      <SelectPagination />
     </>
   );
 };

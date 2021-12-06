@@ -2,10 +2,9 @@ import { Link } from "react-router-dom";
 import { Navbar, NavLink, Nav, Container } from "react-bootstrap";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import LogOut from "./Componenets/LogOut";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 function Linking() {
   const getTokenReducer = useSelector((state) => state.formReducers);
-  console.log(getTokenReducer)
   let getToken = localStorage.getItem("token");
   return (
     <>

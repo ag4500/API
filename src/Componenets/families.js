@@ -3,16 +3,16 @@ import { useEffect } from "react";
 import { familiesInfo } from "../thunks/logItems";
 import { useSelector, useDispatch } from "react-redux";
 import Linking from "../link";
+import SelectPagination  from './select'
 const FamiliesComponent = (props) => {
   const dispatch = useDispatch();
   const family = useSelector((state) => state.ItemsReducers);
   useEffect(() => {
-    dispatch(familiesInfo());
+    dispatch(familiesInfo(family.filters));
     if (!localStorage.getItem('token')){
       props.history.push('/login')
     }
-  }, [dispatch]);
-
+  }, [family.filters]);
   return (
     <>
     <Linking/>
@@ -34,6 +34,7 @@ const FamiliesComponent = (props) => {
           : "Family"}
       </tbody>
     </Table>
+    <SelectPagination/>
     </>
   );
 };

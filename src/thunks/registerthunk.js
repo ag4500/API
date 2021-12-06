@@ -16,6 +16,7 @@ export const logInUserData = (logIn) => async (dispatch) => {
       ...logIn,
     });
     dispatch(userToken(response.data.access_token));
+   
   } catch (err) {
     console.log(err);
   }

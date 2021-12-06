@@ -2,6 +2,7 @@ import { Table } from "react-bootstrap";
 import { useEffect } from "react";
 import { transactionInfo } from "../thunks/logItems";
 import Linking from "../link";
+import SelectPagination  from './select'
 import { useSelector, useDispatch } from "react-redux";
 const TransactionComponent = (props) => {
   const dispatch = useDispatch();
@@ -11,9 +12,9 @@ const TransactionComponent = (props) => {
     if (!token) {
       props.history.push("/login");
     } else {
-    dispatch(transactionInfo());
+    dispatch(transactionInfo(transaction.filters));
     }
-  }, [dispatch]);
+  }, [transaction.filters]);
   return (
     <>
     <Linking/>
@@ -39,8 +40,8 @@ const TransactionComponent = (props) => {
           : "Transaction"}
       </tbody>
     </Table>
+    <SelectPagination/>
     </>
   );
-
 };
 export default TransactionComponent;
