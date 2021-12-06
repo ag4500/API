@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { setUser } from "../actions";
 import { addUserData } from "../thunks/registerthunk";
 import { useSelector, useDispatch } from "react-redux";
+import Linking from "../link";
 const RegisterForm = (history) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.formReducers);
@@ -21,6 +22,8 @@ const RegisterForm = (history) => {
       : dispatch(addUserData(users.registeruser, history));
   };
   return (
+    <>
+    <Linking/>
     <Form onSubmit={OnSubmit} className="container">
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
@@ -48,6 +51,7 @@ const RegisterForm = (history) => {
         Submit
       </Button>
     </Form>
+    </>
   );
 };
 export default RegisterForm;

@@ -2,14 +2,20 @@ import { Table } from "react-bootstrap";
 import { useEffect } from "react";
 import { familiesInfo } from "../thunks/logItems";
 import { useSelector, useDispatch } from "react-redux";
-const FamiliesComponent = () => {
+import Linking from "../link";
+const FamiliesComponent = (props) => {
   const dispatch = useDispatch();
   const family = useSelector((state) => state.ItemsReducers);
   useEffect(() => {
     dispatch(familiesInfo());
+    if (!localStorage.getItem('token')){
+      props.history.push('/login')
+    }
   }, [dispatch]);
 
   return (
+    <>
+    <Linking/>
     <Table striped bordered hover size="lg">
       <thead>
         <tr>
@@ -28,6 +34,7 @@ const FamiliesComponent = () => {
           : "Family"}
       </tbody>
     </Table>
+    </>
   );
 };
 export default FamiliesComponent;

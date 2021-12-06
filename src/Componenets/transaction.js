@@ -1,6 +1,7 @@
 import { Table } from "react-bootstrap";
 import { useEffect } from "react";
 import { transactionInfo } from "../thunks/logItems";
+import Linking from "../link";
 import { useSelector, useDispatch } from "react-redux";
 const TransactionComponent = () => {
   const dispatch = useDispatch();
@@ -9,6 +10,8 @@ const TransactionComponent = () => {
     dispatch(transactionInfo());
   }, [dispatch]);
   return (
+    <>
+    <Linking/>
     <Table striped bordered hover size="lg">
       <thead>
         <tr>
@@ -31,6 +34,8 @@ const TransactionComponent = () => {
           : "Transaction"}
       </tbody>
     </Table>
+    </>
   );
+
 };
 export default TransactionComponent;

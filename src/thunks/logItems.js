@@ -6,11 +6,12 @@ import {
   transactionData,
 } from "../actions";
 
-let getToken = localStorage.getItem("token");
-
-client.defaults.headers.common["Authorization"] = `Bearer ${getToken} `;
 export const productData = () => async (dispatch) => {
   try {
+    let getToken = localStorage.getItem("token");
+
+    client.defaults.headers.common["Authorization"] = `Bearer ${getToken} `;
+
     const response = await client.get("/products");
     dispatch(productItems(response.data));
   } catch (err) {
@@ -19,6 +20,9 @@ export const productData = () => async (dispatch) => {
 };
 export const familiesInfo = () => async (dispatch) => {
   try {
+    let getToken = localStorage.getItem("token");
+
+    client.defaults.headers.common["Authorization"] = `Bearer ${getToken} `;
     const response = await client.get("/families");
     dispatch(familiesData(response.data));
   } catch (err) {
@@ -27,6 +31,9 @@ export const familiesInfo = () => async (dispatch) => {
 };
 export const transactionInfo = () => async (dispatch) => {
   try {
+    let getToken = localStorage.getItem("token");
+
+    client.defaults.headers.common["Authorization"] = `Bearer ${getToken} `;
     const response = await client.get("/transactions");
     dispatch(transactionData(response.data));
   } catch (err) {
@@ -35,6 +42,9 @@ export const transactionInfo = () => async (dispatch) => {
 };
 export const locationData = () => async (dispatch) => {
   try {
+    let getToken = localStorage.getItem("token");
+
+    client.defaults.headers.common["Authorization"] = `Bearer ${getToken} `;
     const response = await client.get("/locations");
     dispatch(locationInfo(response.data));
   } catch (err) {

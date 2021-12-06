@@ -2,13 +2,19 @@ import { Table } from "react-bootstrap";
 import { useEffect } from "react";
 import { locationData } from "../thunks/logItems";
 import { useSelector, useDispatch } from "react-redux";
-const Locations = () => {
+import Linking from "../link";
+const Locations = (props) => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.ItemsReducers);
   useEffect(() => {
     dispatch(locationData());
+    if (!localStorage.getItem('token')){
+      props.history.push('/login')
+    }
   }, [dispatch]);
   return (
+    <>
+    <Linking/>
     <Table striped bordered hover size="lg">
       <thead>
         <tr>
@@ -27,6 +33,7 @@ const Locations = () => {
           : "location"}
       </tbody>
     </Table>
+    </>
   );
 };
 export default Locations;

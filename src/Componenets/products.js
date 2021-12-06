@@ -2,27 +2,38 @@ import { Table } from "react-bootstrap";
 import { useEffect } from "react";
 import { productData } from "../thunks/logItems";
 import { useSelector, useDispatch } from "react-redux";
-const Products = () => {
+import Linking from "../link";
+const Products = (props) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.ItemsReducers);
   useEffect(() => {
-    dispatch(productData());
+    let token=localStorage.getItem('token')
+    if (!token) {
+      console.log("token",token)
+      props.history.push('/login')
+    } else {
+      dispatch(productData());
+    }
+
+
   }, [dispatch]);
 
   return (
-    <Table striped bordered hover size="lg">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Cost</th>
-          <th>Quantity</th>
-          <th> locationId</th>
-        </tr>
-      </thead>
-      <tbody>
-        {product
-          ? product.products.map((data) => (
+    <>
+      <Linking />
+      <Table striped bordered hover size="lg">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Cost</th>
+            <th>Quantity</th>
+            <th> locationId</th>
+          </tr>
+        </thead>
+        <tbody>
+          {product
+            ? product.products.map((data) => (
               <tr>
                 <td>{data.id}</td>
                 <td>{data.name}</td>
@@ -31,9 +42,10 @@ const Products = () => {
                 <td>{data.locationId}</td>
               </tr>
             ))
-          : "Product"}
-      </tbody>
-    </Table>
+            : "Product"}
+        </tbody>
+      </Table>
+    </>
   );
 };
 export default Products;

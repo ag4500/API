@@ -8,18 +8,18 @@ const initialState = {
     email: "",
     password: "",
   },
-  token: getItemOnLocalStorage(),
+   token: getItemOnLocalStorage(),
 };
 const setItemOnLocalStorage = (token) => {
-  return localStorage.setItem("token", token);
+  localStorage.setItem("token", token);
 };
 export default function formReducers(state = initialState, action) {
   switch (action.type) {
-    case User_Token:
-      const token=setItemOnLocalStorage(action.payload)
+     case User_Token:
+    const token=setItemOnLocalStorage(action.payload)
       return {
         ...state,
-        token: token ,
+        token,
       };
     case Set_User:
       return {
