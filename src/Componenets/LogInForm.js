@@ -13,7 +13,7 @@ const LogInForm = (props) => {
     const addusers = { ...users.registeruser, [name]: value };
     dispatch(setUser(addusers));
   };
-  const OnSubmit = async (e) => {
+  const OnSubmit =  (e) => {
     e.preventDefault();
     if (
       users.registeruser.email.trim() == "" &&

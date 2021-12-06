@@ -13,7 +13,7 @@ const RegisterForm = (history) => {
     const addusers = { ...users.registeruser, [name]: value };
     dispatch(setUser(addusers));
   };
-  const OnSubmit = async (e) => {
+  const OnSubmit = (e) => {
     e.preventDefault();
     users.registeruser.email.trim() == "" &&
     users.registeruser.password.trim() == ""
