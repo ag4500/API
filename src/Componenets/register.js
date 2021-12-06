@@ -7,7 +7,6 @@ import Linking from "../link";
 const RegisterForm = (history) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.formReducers);
-  
   const { email, password } = users.registeruser;
   const onChange = (e) => {
     const { name, value } = e.target;

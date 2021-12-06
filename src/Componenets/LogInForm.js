@@ -7,7 +7,6 @@ import Linking from "../link";
 const LogInForm = (props) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.formReducers);
-  console.log(users);
   const { email, password } = users.registeruser;
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +22,8 @@ const LogInForm = (props) => {
       alert("Email and Password should not be empty");
     } else {
       dispatch(logInUserData(users.registeruser));
+      props.history.push('/')
+
     }
   };
   return (

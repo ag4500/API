@@ -3,11 +3,16 @@ import { useEffect } from "react";
 import { transactionInfo } from "../thunks/logItems";
 import Linking from "../link";
 import { useSelector, useDispatch } from "react-redux";
-const TransactionComponent = () => {
+const TransactionComponent = (props) => {
   const dispatch = useDispatch();
   const transaction = useSelector((state) => state.ItemsReducers);
   useEffect(() => {
+    let token = localStorage.getItem("token");
+    if (!token) {
+      props.history.push("/login");
+    } else {
     dispatch(transactionInfo());
+    }
   }, [dispatch]);
   return (
     <>

@@ -5,7 +5,7 @@ import LogOut from "./Componenets/LogOut";
 import { useSelector, useDispatch } from "react-redux";
 function Linking() {
   const getTokenReducer = useSelector((state) => state.formReducers);
-  console.log("get ", getTokenReducer);
+  console.log(getTokenReducer)
   let getToken = localStorage.getItem("token");
   return (
     <>
