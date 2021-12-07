@@ -12,12 +12,7 @@ client.interceptors.request.use(
     }
     return config;
   },
-  (err) => {
-    if (err.response.status === 404) {
-      throw new Error(`${err.config.url} not found`);
-    }
-    throw err;
-  }
+  (error) => Promise.reject(error)
 );
 
 export default client;
