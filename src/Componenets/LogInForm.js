@@ -1,13 +1,14 @@
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { setUser } from "../actions";
-import { logInUserData } from "../thunks/registerthunk";
+import { logInUser } from "../thunks/AuthenticationThunk";
 import { useSelector, useDispatch } from "react-redux";
-import Linking from "../link";
-const LogInForm = (props) => {
+
+const LogInForm = () => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.formReducers);
+  const users = useSelector((state) => state.authenticationReducer);
   const { email, password } = users.registeruser;
+
   const onChange = (e) => {
     const { name, value } = e.target;
     const addusers = { ...users.registeruser, [name]: value };
@@ -21,15 +22,12 @@ const LogInForm = (props) => {
     ) {
       alert("Email and Password should not be empty");
     } else {
-      dispatch(logInUserData(users.registeruser));
-      props.history.push('/')
-
+      dispatch(logInUser(users.registeruser));
     }
   };
   return (
     <>
-      <Linking />
-      <Form onSubmit={OnSubmit} className="container">
+      <Form onSubmit={OnSubmit} className="container my-4">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -52,7 +50,7 @@ const LogInForm = (props) => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="success" type="submit">
           LogIn
         </Button>
       </Form>

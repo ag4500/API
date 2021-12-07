@@ -1,46 +1,39 @@
 import { Table } from "react-bootstrap";
 import { useEffect } from "react";
-import { transactionInfo } from "../thunks/logItems";
-import Linking from "../link";
-import SelectPagination  from './select'
+import { transactionInfo } from "../thunks/PagesThunk";
+import SelectPagination from "./select";
 import { useSelector, useDispatch } from "react-redux";
-const TransactionComponent = (props) => {
+const TransactionComponent = () => {
   const dispatch = useDispatch();
-  const transaction = useSelector((state) => state.ItemsReducers);
+  const transaction = useSelector((state) => state.pagesReducers);
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    if (!token) {
-      props.history.push("/login");
-    } else {
     dispatch(transactionInfo(transaction.filters));
-    }
   }, [transaction.filters]);
   return (
     <>
-    <Linking/>
-    <Table striped bordered hover size="lg">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Cost</th>
-          <th>Quantity</th>
-          <th> locationId</th>
-        </tr>
-      </thead>
-      <tbody>
-        {transaction
-          ? transaction.transaction.map((data) => (
-              <tr>
-                <td>{data.id}</td>
-                <td>{data.cost}</td>
-                <td>{data.quantity}</td>
-                <td>{data.productId}</td>
-              </tr>
-            ))
-          : "Transaction"}
-      </tbody>
-    </Table>
-    <SelectPagination/>
+      <Table striped bordered hover size="lg">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cost</th>
+            <th>Quantity</th>
+            <th> locationId</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transaction
+            ? transaction.transaction.map((data) => (
+                <tr>
+                  <td>{data.id}</td>
+                  <td>{data.cost}</td>
+                  <td>{data.quantity}</td>
+                  <td>{data.productId}</td>
+                </tr>
+              ))
+            : "Transaction"}
+        </tbody>
+      </Table>
+      <SelectPagination />
     </>
   );
 };

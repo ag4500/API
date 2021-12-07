@@ -1,40 +1,36 @@
 import { Table } from "react-bootstrap";
 import { useEffect } from "react";
-import { locationData } from "../thunks/logItems";
+import { locationData } from "../thunks/PagesThunk";
 import { useSelector, useDispatch } from "react-redux";
-import Linking from "../link";
-import SelectPagination  from './select'
-const Locations = (props) => {
+import SelectPagination from "./select";
+const Locations = () => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.ItemsReducers);
+  const data = useSelector((state) => state.pagesReducers);
+  
   useEffect(() => {
     dispatch(locationData(data.filters));
-    if (!localStorage.getItem('token')){
-      props.history.push('/login')
-    }
   }, [data.filters]);
   return (
     <>
-    <Linking/>
-    <Table striped bordered hover size="lg">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data
-          ? data.location.map((data) => (
-              <tr>
-                <td>{data.id}</td>
-                <td>{data.name}</td>
-              </tr>
-            ))
-          : "location"}
-      </tbody>
-    </Table>
-    <SelectPagination />
+      <Table striped bordered hover size="lg">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data
+            ? data.location.map((data) => (
+                <tr>
+                  <td>{data.id}</td>
+                  <td>{data.name}</td>
+                </tr>
+              ))
+            : "location"}
+        </tbody>
+      </Table>
+      <SelectPagination />
     </>
   );
 };

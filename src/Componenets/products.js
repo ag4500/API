@@ -1,24 +1,19 @@
 import { Table } from "react-bootstrap";
 import { useEffect } from "react";
-import { productData } from "../thunks/logItems";
+import { productData } from "../thunks/PagesThunk";
 import { useSelector, useDispatch } from "react-redux";
-import Linking from "../link";
 import SelectPagination from "./select";
-const Products = (props) => {
+const Products = () => {
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.ItemsReducers);
+  const product = useSelector((state) => state.pagesReducers);
+
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    if (!token) {
-      props.history.push("/login");
-    } else {
-      dispatch(productData(product.filters));
-    }
+    dispatch(productData(product.filters));
   }, [product.filters]);
+
   return (
     <>
-      <Linking />
-      <Table striped bordered hover size="lg">
+      <Table striped bordered hover size="lg" >
         <thead>
           <tr>
             <th>ID</th>
@@ -42,7 +37,8 @@ const Products = (props) => {
             : "Product"}
         </tbody>
       </Table>
-      <SelectPagination />
+     <SelectPagination />
+      
     </>
   );
 };

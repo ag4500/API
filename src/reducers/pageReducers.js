@@ -3,8 +3,9 @@ import {
   Location_Info,
   Families,
   Transaction,
-  Set_Filter
+  Set_Filter,
 } from "../actions";
+
 const initialState = {
   products: [],
   location: [],
@@ -12,7 +13,8 @@ const initialState = {
   transaction: [],
   filters: { page: 1, limit: 10 },
 };
-export default function ItemsReducers(state = initialState, action) {
+
+export default function pagesReducers(state = initialState, action) {
   switch (action.type) {
     case Products_Item:
       return {

@@ -1,4 +1,5 @@
-import { User_Token, Set_User } from "../actions";
+import { Get_Access_Token, Set_User } from "../actions";
+
 const getItemOnLocalStorage = () => {
   let getToken = localStorage.getItem("token") || "";
   return getToken;
@@ -8,25 +9,21 @@ const initialState = {
     email: "",
     password: "",
   },
-   token: getItemOnLocalStorage(),
+  token: getItemOnLocalStorage(),
 };
-const setItemOnLocalStorage = (token) => {
-  localStorage.setItem("token", token);
-};
-export default function formReducers(state = initialState, action) {
+
+export default function authenticationReducer(state = initialState, action) {
   switch (action.type) {
-     case User_Token:
-    const token=setItemOnLocalStorage(action.payload)
+    case Get_Access_Token:
       return {
         ...state,
-        token,
+        token: action.payload,
       };
     case Set_User:
       return {
         ...state,
         registeruser: action.payload,
       };
-
     default:
       return state;
   }

@@ -1,25 +1,37 @@
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import RegisterForm from "./Componenets/register";
 import LogInForm from "./Componenets/LogInForm";
 import Locations from "./Componenets/locations";
 import Products from "./Componenets/products";
 import TransactionComponent from "./Componenets/transaction";
 import FamiliesComponent from "./Componenets/families";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Linking from "./link";
+import ProtectedRouting from "./protected";
+import PublicRouting from "./public";
+import Header from "./header";
 function Routing() {
   return (
     <>
       <Router>
+        <Header />
         <Switch>
-         <Route exact path="/" component={Linking} />
-          <Route exact path="/login" component={LogInForm} />
-          <Route exact path="/register" component={RegisterForm} />
-          <Route exact path="/products" component={Products} />
-          <Route path="/locations" component={Locations} />
-          <Route path="/transaction" component={TransactionComponent} />
-          <Route path="/families" component={FamiliesComponent} />
-         
+          <Route exact path="/login">
+            <PublicRouting component={LogInForm} />
+          </Route>
+          <Route exact path="/register">
+            <PublicRouting component={RegisterForm} />
+          </Route>
+          <Route exact path="/products">
+            <ProtectedRouting component={Products} />
+          </Route>
+          <Route exact path="/locations">
+            <ProtectedRouting component={Locations} />
+          </Route>
+          <Route exact path="/transaction">
+            <ProtectedRouting component={TransactionComponent} />
+          </Route>
+          <Route exact path="/families">
+            <ProtectedRouting component={FamiliesComponent} />
+          </Route>
         </Switch>
       </Router>
     </>

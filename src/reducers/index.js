@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import formReducers from "./formReducer";
-import ItemsReducers from "./logItemReducer";
+import authenticationReducer from "./AuthenticationReducer";
+import pagesReducers from "./pageReducers";
 export default combineReducers({
-    formReducers,
-    ItemsReducers
+    authenticationReducer,
+    pagesReducers
 });

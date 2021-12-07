@@ -1,29 +1,30 @@
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { setUser } from "../actions";
-import { addUserData } from "../thunks/registerthunk";
+import { registerUser } from "../thunks/AuthenticationThunk";
 import { useSelector, useDispatch } from "react-redux";
-import Linking from "../link";
+
 const RegisterForm = (history) => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.formReducers);
+  const users = useSelector((state) => state.authenticationReducer);
   const { email, password } = users.registeruser;
+
   const onChange = (e) => {
     const { name, value } = e.target;
     const addusers = { ...users.registeruser, [name]: value };
     dispatch(setUser(addusers));
   };
+
   const OnSubmit = (e) => {
     e.preventDefault();
     users.registeruser.email.trim() == "" &&
     users.registeruser.password.trim() == ""
       ? alert("Please Enter Valid Credentials")
-      : dispatch(addUserData(users.registeruser, history));
+      : dispatch(registerUser(users.registeruser, history));
   };
   return (
     <>
-      <Linking />
-      <Form onSubmit={OnSubmit} className="container">
+      <Form onSubmit={OnSubmit} className="container my-4">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -46,7 +47,7 @@ const RegisterForm = (history) => {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          Register
         </Button>
       </Form>
     </>

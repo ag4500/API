@@ -1,14 +1,13 @@
-import { useHistory } from "react-router";
+import { Button } from "react-bootstrap";
 const LogOut = () => {
-  const history = useHistory();
   const handleClick = () => {
    localStorage.removeItem("token");
-    history.push("/login");
+    window.location.reload()
   };
   return (
-    <button type="submit" onClick={handleClick}>
+    <Button type="submit" variant="danger" style={{ marginRight:'50px'}} onClick={handleClick}>
       LogOut
-    </button>
+    </Button>
   );
 };
 export default LogOut;

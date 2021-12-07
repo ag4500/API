@@ -2,22 +2,24 @@ import { setFilter } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "react-bootstrap/Pagination";
 const SelectPagination = () => {
-  const filterdata = useSelector((state) => state.ItemsReducers);
+  const filterdata = useSelector((state) => state.pagesReducers);
   const dispatch = useDispatch();
   const handlePage = (e) => {
     const { name, value } = e.target;
     dispatch(setFilter({ ...filterdata.filters, [name]: value }));
   };
+
   const handlePageChange = (page) => {
     dispatch(
       setFilter({ ...filterdata.filters, page: page + filterdata.filters.page })
     );
   };
+
   return (
     <>
-      <div class="container">
-        <div class="row">
-          <div class="col-2">
+      <div className="container" style={{marginLeft:'500px'}} >
+        <div className="row">
+          <div className="col-2">
             <select
               className="form-select my-3"
               value={filterdata.filters.limit}
@@ -30,7 +32,7 @@ const SelectPagination = () => {
               <option value={15}>15</option>
               <option value={20}>20</option>
             </select>
-            <Pagination>
+            <Pagination >
               <Pagination.Prev
                 disabled={filterdata.filters.page === 1}
                 onClick={() => handlePageChange(-1)}
