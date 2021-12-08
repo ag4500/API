@@ -1,14 +1,21 @@
 import { Table } from "react-bootstrap";
 import { useEffect } from "react";
-import { transactionInfo } from "../thunks/PagesThunk";
-import SelectPagination from "./select";
+import { transactionInfo } from "../thunks/pagesThunk";
+import SelectPagination from "./SelectPagination";
 import { useSelector, useDispatch } from "react-redux";
-const TransactionComponent = () => {
+import { setTransactionFilters } from "../actions";
+const Transaction = () => {
   const dispatch = useDispatch();
-  const transaction = useSelector((state) => state.pagesReducers);
+  const transaction = useSelector((state) => state.pagesReducers.transactions);
+  const { records, filters } = transaction;
+  console.log(filters)
   useEffect(() => {
-    dispatch(transactionInfo(transaction.filters));
-  }, [transaction.filters]);
+    dispatch(transactionInfo(filters));
+  }, [dispatch,filters]);
+
+  const setFilters = (nextFilters) => {
+    dispatch(setTransactionFilters(nextFilters));
+  };
   return (
     <>
       <Table striped bordered hover size="lg">
@@ -21,8 +28,8 @@ const TransactionComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {transaction
-            ? transaction.transaction.map((data) => (
+          {records.length
+            ? records.map((data) => (
                 <tr>
                   <td>{data.id}</td>
                   <td>{data.cost}</td>
@@ -33,8 +40,8 @@ const TransactionComponent = () => {
             : "Transaction"}
         </tbody>
       </Table>
-      <SelectPagination />
+      <SelectPagination filters={filters} setFilters={setFilters} />
     </>
   );
 };
-export default TransactionComponent;
+export default Transaction;

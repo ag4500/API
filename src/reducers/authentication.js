@@ -1,4 +1,4 @@
-import { Get_Access_Token, Set_User } from "../actions";
+import { GET_ACCESS_TOKEN , SET_USER } from "../actions";
 
 const getItemOnLocalStorage = () => {
   let getToken = localStorage.getItem("token") || "";
@@ -14,12 +14,12 @@ const initialState = {
 
 export default function authenticationReducer(state = initialState, action) {
   switch (action.type) {
-    case Get_Access_Token:
+    case GET_ACCESS_TOKEN :
       return {
         ...state,
         token: action.payload,
       };
-    case Set_User:
+    case SET_USER:
       return {
         ...state,
         registeruser: action.payload,

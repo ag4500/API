@@ -1,10 +1,10 @@
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { setUser } from "../actions";
-import { registerUser } from "../thunks/AuthenticationThunk";
+import { requestRegisterUser } from "../thunks/authenticationThunk";
 import { useSelector, useDispatch } from "react-redux";
 
-const RegisterForm = (history) => {
+const RegisterForm = (props) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.authenticationReducer);
   const { email, password } = users.registeruser;
@@ -17,11 +17,12 @@ const RegisterForm = (history) => {
 
   const OnSubmit = (e) => {
     e.preventDefault();
-    users.registeruser.email.trim() == "" &&
-    users.registeruser.password.trim() == ""
-      ? alert("Please Enter Valid Credentials")
-      : dispatch(registerUser(users.registeruser, history));
+    if (users.registeruser.email.trim() && users.registeruser.password.trim()) {
+      return alert("Please Enter Valid Credentials");
+    }
+    dispatch(requestRegisterUser(users.registeruser, props.history));
   };
+
   return (
     <>
       <Form onSubmit={OnSubmit} className="container my-4">

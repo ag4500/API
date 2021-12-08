@@ -1,15 +1,20 @@
 import { Table } from "react-bootstrap";
 import { useEffect } from "react";
-import { locationData } from "../thunks/PagesThunk";
+import { locationData } from "../thunks/pagesThunk";
 import { useSelector, useDispatch } from "react-redux";
-import SelectPagination from "./select";
+import SelectPagination from "./SelectPagination";
+import { setLocationsFilters } from "../actions";
 const Locations = () => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.pagesReducers);
-  
+  const location = useSelector((state) => state.pagesReducers.locations);
+  const { records, filters } = location;
   useEffect(() => {
-    dispatch(locationData(data.filters));
-  }, [data.filters]);
+    console.log(filters)
+    dispatch(locationData(filters));
+  }, [dispatch,filters]);
+  const setFilters = (nextFilters) => {
+    dispatch(setLocationsFilters(nextFilters));
+  };
   return (
     <>
       <Table striped bordered hover size="lg">
@@ -20,8 +25,8 @@ const Locations = () => {
           </tr>
         </thead>
         <tbody>
-          {data
-            ? data.location.map((data) => (
+          {records.length
+            ? records.map((data) => (
                 <tr>
                   <td>{data.id}</td>
                   <td>{data.name}</td>
@@ -30,7 +35,7 @@ const Locations = () => {
             : "location"}
         </tbody>
       </Table>
-      <SelectPagination />
+      <SelectPagination filters={filters} setFilters={setFilters}/>
     </>
   );
 };

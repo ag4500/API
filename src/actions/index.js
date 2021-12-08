@@ -1,42 +1,58 @@
-export const Get_Access_Token = "Get_Access_Token";
-export const Set_User = "Set_User";
-export const Products_Item = "Products_Item";
-export const Location_Info = "Location_Info";
-export const Families = "Families";
-export const Transaction = "Transaction";
-export const Set_Filter = "Set_Filter";
+export const GET_ACCESS_TOKEN = "GET_ACCESS_TOKEN ";
+export const SET_USER = "SET_USER";
+export const PRODUCTS_ITEM = "PRODUCTS_ITEM";
+export const LOCATION_INFO = "LOCATION_INFO";
+export const FAMILIES_DATA = "FAMILIES_DATA";
+export const TRANSACTION_DATA = "TRANSACTION_DATA";
+
+export const PRODUCT_ITEM_FILTERS = "PRODUCT_ITEM_FILTERS";
+export const LOCATION_DATA_FILTERS = "LOCATION_DATA_FILTERS";
+export const FAMILIES_DATA_FILTERS = "FAMILIES_DATA_FILTERS";
+export const TRANSACTION_DATA_FILTERS = "TRANSACTION_DATA_FILTERS";
 
 export const setUser = (payload) => ({
-  type: Set_User,
+  type: SET_USER,
   payload,
 });
 
 export const getAccessToken = (payload) => ({
-  type: Get_Access_Token,
+  type: GET_ACCESS_TOKEN,
   payload,
 });
 
 export const productItems = (payload) => ({
-  type: Products_Item,
+  type: PRODUCTS_ITEM,
   payload,
 });
 
 export const locationInfo = (payload) => ({
-  type: Location_Info,
+  type: LOCATION_INFO,
   payload,
 });
 
 export const familiesData = (payload) => ({
-  type: Families,
+  type: FAMILIES_DATA,
   payload,
 });
 
 export const transactionData = (payload) => ({
-  type: Transaction,
+  type: TRANSACTION_DATA,
   payload,
 });
 
-export const setFilter = (payload) => ({
-  type: Set_Filter,
+export const setProductsFilters = (payload) => ({
+  type: PRODUCT_ITEM_FILTERS,
+  payload,
+});
+export const setLocationsFilters = (payload) => ({
+  type: LOCATION_DATA_FILTERS,
+  payload,
+});
+export const setFamiliesFilters = (payload) => ({
+  type: FAMILIES_DATA_FILTERS,
+  payload,
+});
+export const setTransactionFilters = (payload) => ({
+  type: TRANSACTION_DATA_FILTERS,
   payload,
 });

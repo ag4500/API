@@ -1,22 +1,20 @@
 import client from "./axios";
 import { getAccessToken } from "../actions";
-export const registerUser = (user, props) => async () => {
+
+export const requestRegisterUser = (user, props) => async () => {
   try {
-    await client.post("auth/register", {
-      ...user,
-    });
+    await client.post("auth/register", user);
     props.history.push("/login");
   } catch (err) {
     alert(err);
   }
 };
-export const logInUser = (logIn) => async (dispatch) => {
+
+export const requestLoginUser = (authData) => async (dispatch) => {
   try {
-    const response = await client.post("auth/login", {
-      ...logIn,
-    });
+    const response = await client.post("auth/login", authData);
     localStorage.setItem("token", response.data.access_token);
-    client.defaults.headers.common[
+    client.defaults.headers[
       "Authorization"
     ] = `Bearer ${response.data.access_token}`;
     dispatch(getAccessToken(response.data.access_token));

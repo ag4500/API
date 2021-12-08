@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import RegisterForm from "./Componenets/register";
+import RegisterForm from "./Componenets/RegisterForm";
 import LogInForm from "./Componenets/LogInForm";
-import Locations from "./Componenets/locations";
-import Products from "./Componenets/products";
-import TransactionComponent from "./Componenets/transaction";
-import FamiliesComponent from "./Componenets/families";
-import ProtectedRouting from "./protected";
-import PublicRouting from "./public";
-import Header from "./header";
-function Routing() {
+import Locations from "./Componenets/Locations";
+import Products from "./Componenets/Products";
+import Transaction from "./Componenets/Transaction";
+import Families from "./Componenets/Families";
+import ProtectedRouting from "./ProtetedRouting";
+import PublicRouting from "./PublicRouting";
+import Header from "./Header";
+function Routes() {
   return (
     <>
       <Router>
@@ -27,14 +27,14 @@ function Routing() {
             <ProtectedRouting component={Locations} />
           </Route>
           <Route exact path="/transaction">
-            <ProtectedRouting component={TransactionComponent} />
+            <ProtectedRouting component={Transaction} />
           </Route>
           <Route exact path="/families">
-            <ProtectedRouting component={FamiliesComponent} />
+            <ProtectedRouting component={Families} />
           </Route>
         </Switch>
       </Router>
     </>
   );
 }
-export default Routing;
+export default Routes;

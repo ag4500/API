@@ -1,19 +1,24 @@
 import { Table } from "react-bootstrap";
 import { useEffect } from "react";
-import { productData } from "../thunks/PagesThunk";
+import { productData } from "../thunks/pagesThunk";
 import { useSelector, useDispatch } from "react-redux";
-import SelectPagination from "./select";
+import SelectPagination from "./SelectPagination";
+
+import { setProductsFilters } from "../actions";
 const Products = () => {
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.pagesReducers);
-
+  const product = useSelector((state) => state.pagesReducers.products);
+  const { records, filters } = product;
   useEffect(() => {
-    dispatch(productData(product.filters));
-  }, [product.filters]);
+    dispatch(productData(filters));
+  }, [dispatch,filters]);
 
+  const setFilters = (nextFilters) => {
+    dispatch(setProductsFilters(nextFilters));
+  };
   return (
     <>
-      <Table striped bordered hover size="lg" >
+      <Table striped bordered hover size="lg">
         <thead>
           <tr>
             <th>ID</th>
@@ -24,8 +29,8 @@ const Products = () => {
           </tr>
         </thead>
         <tbody>
-          {product
-            ? product.products.map((data) => (
+          {records.length
+            ? records.map((data) => (
                 <tr>
                   <td>{data.id}</td>
                   <td>{data.name}</td>
@@ -37,8 +42,7 @@ const Products = () => {
             : "Product"}
         </tbody>
       </Table>
-     <SelectPagination />
-      
+      <SelectPagination filters={filters} setFilters={setFilters} />
     </>
   );
 };

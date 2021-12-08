@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { setUser } from "../actions";
-import { logInUser } from "../thunks/AuthenticationThunk";
+import { requestLoginUser} from "../thunks/authenticationThunk";
 import { useSelector, useDispatch } from "react-redux";
 
 const LogInForm = () => {
@@ -14,16 +14,16 @@ const LogInForm = () => {
     const addusers = { ...users.registeruser, [name]: value };
     dispatch(setUser(addusers));
   };
-  const OnSubmit =  (e) => {
+
+  const OnSubmit = (e) => {
     e.preventDefault();
     if (
-      users.registeruser.email.trim() == "" &&
-      users.registeruser.password.trim() == ""
+      !users.registeruser.email.trim() &&
+      !users.registeruser.password.trim()
     ) {
-      alert("Email and Password should not be empty");
-    } else {
-      dispatch(logInUser(users.registeruser));
+      return alert("Please Enter Valid Credentials");
     }
+    dispatch(requestLoginUser(users.registeruser));
   };
   return (
     <>
